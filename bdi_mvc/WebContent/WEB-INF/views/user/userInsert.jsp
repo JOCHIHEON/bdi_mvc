@@ -22,7 +22,7 @@
 	function insertDel(){
 		var name = document.querySelector("name").value;
 		var age = document.querySelector("age").value;
-		location.href='/user/userInsert?name='+name+'&age'+age;
+		location.href='/user/userInsert?name='+name+'&age='+age;
 	}
 	function goPage(){
 		location.href='/user/userList';
