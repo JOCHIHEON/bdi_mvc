@@ -23,5 +23,9 @@ private DelDAO ddao = new DelDAOImpl();
 		int cnt = ddao.deleteDels(nums);
 		return ddao.selectDelList();
 	}
+	@Override
+	public int insertDel(String name, String age) throws SQLException {
+		return ddao.insertDel(name, age);
+	}
 
 }

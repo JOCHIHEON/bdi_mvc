@@ -10,8 +10,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.bdi.mvc.common.DBCon;
+import com.bdi.mvc.dao.DelDAO;
 
-public class DelDAOImpl implements com.bdi.mvc.dao.DelDAO {
+public class DelDAOImpl implements DelDAO {
 
 	@Override
 	public List<Map<String, String>> selectDelList() throws SQLException {
@@ -74,6 +75,22 @@ public class DelDAOImpl implements com.bdi.mvc.dao.DelDAO {
 			DBCon.close();
 		}
 		return cnt;
+	}
+	@Override
+	public int insertDel(String name, String age) throws SQLException {
+		try {
+			Connection con = DBCon.getCon();
+			String sql = "insert into del(name, age)";
+			sql += "values(?,?)";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, name);
+			ps.setString(2, age);
+			return ps.executeUpdate();
+		}catch(SQLException e) {
+			throw e;
+		}finally {
+			DBCon.close();
+		}
 	}
 }
 

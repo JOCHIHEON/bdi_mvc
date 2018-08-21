@@ -29,7 +29,9 @@ public class UserServlet extends HttpServlet {
 				int num = Integer.parseInt(request.getParameter("num"));
 				request.setAttribute("user", ds.getDel(num));
 			}else if (cmd.equals("userInsert")) {
-				
+				String name = request.getParameter("name");
+				String age = request.getParameter("age");
+				request.setAttribute("cnt", ds.insertDel(name, age));
 			}else if (cmd.equals("userUpdate")) {
 				
 			}else if (cmd.equals("userDelete")) {
