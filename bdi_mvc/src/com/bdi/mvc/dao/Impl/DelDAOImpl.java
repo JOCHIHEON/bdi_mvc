@@ -92,5 +92,21 @@ public class DelDAOImpl implements DelDAO {
 			DBCon.close();
 		}
 	}
+	@Override
+	public int updateDel(int num, String name, String age) throws SQLException {
+		try {
+			Connection con = DBCon.getCon();
+			String sql = "update del set name=?, age=? where num=?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, name);
+			ps.setString(2, age);
+			ps.setInt(3, num);
+			return ps.executeUpdate();
+		}catch(SQLException e) {
+			throw e;
+		}finally {
+			DBCon.close();
+		}
+	}
 }
 

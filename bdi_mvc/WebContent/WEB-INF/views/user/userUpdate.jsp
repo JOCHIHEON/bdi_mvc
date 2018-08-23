@@ -5,32 +5,35 @@
 <div class="container">
 <table class="table table-bordered">
 	<tr>
+		<th>번호</th>
+		<td>${user.num}</td>
+	</tr>
+	<tr>
 		<th>이름</th>
-		<td><input type="text" id="name"></td>
+		<td><input type="text" id="name" value="${user.name}"></td>
 	</tr>
 	<tr>
 		<th>나이</th>
-		<td><input type="number" id="age"></td>
+		<td><input type="number" id="age" value="${user.age}"></td>
 	</tr>
 	<tr>
-		<td colspan="2"><button onclick="insertDel()">등록</button>
-		<button onclick="goPage()">취소</button></td>
+		<td colspan="2"><button onclick="updateDel()">수정</button></td>
 	</tr>
 </table>
 </div>
 </body>
 <script>
-	function insertDel(){
+	function updateDel(){
 		var name = document.querySelector("#name").value;
 		var age = document.querySelector("#age").value;
-		location.href='/user/userInsert?name='+name+'&age='+age;
+		location.href='/user/userUpdate?num=${user.num}&name='+name+'&age='+age;
 	}
 	function goPage(){
 		location.href='/user/userList';
 	}
 	var cnt = '${cnt}';
 	if(cnt==1){
-		alert('등록이 잘 되었습니다.');
+		alert('수정이 잘 되었습니다.');
 		goPage();
 	}else if(cnt===0){
 		alert('등록에 실패하였습니다.');
