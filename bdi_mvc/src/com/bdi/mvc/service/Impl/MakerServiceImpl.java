@@ -16,15 +16,13 @@ public class MakerServiceImpl implements MakerService {
 	}
 
 	@Override
-	public Maker getMaker(int mnum) {
-		// TODO Auto-generated method stub
-		return null;
+	public Maker getMaker(int mNum) {
+		return mdao.selectMaker(mNum);
 	}
 
 	@Override
 	public Map<String, Object> insertMaker(Maker mk) {
-		// TODO Auto-generated method stub
-		return null;
+		return mdao.insertMaker(mk);
 	}
 
 	@Override

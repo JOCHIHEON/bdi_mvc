@@ -19,7 +19,7 @@
 				<c:forEach items="${list}" var ="m"> 
 					<tr>
 						<td>${m.mnum}</td>
-						<td>${m.mname}</td>
+						<td><a href="/maker/makerView?mNum=${m.mnum}">${m.mname}</a></td>
 						<td>${m.mprice}</td>
 						<td>${m.mcnt}</td>
 						<td>${m.mtotal}</td>
