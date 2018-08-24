@@ -24,15 +24,16 @@ public class MakerServlet extends HttpServlet {
 				List<Maker> makerList = ms.getMakerList(null);
 				request.setAttribute("list", makerList);
 			}else if(cmd.equals("makerView")) {
-				int mNum = Integer.parseInt(request.getParameter("mNum"));
+				int mNum =  Integer.parseInt(request.getParameter("mNum"));
 				request.setAttribute("maker",ms.getMaker(mNum));
-			}else if(cmd.equals("insertMaker")) {
+			}else if(cmd.equals("makerInsert")) {
+				request.setCharacterEncoding("UTF-8");
 				String mName  = request.getParameter("mName");
-				int mPrice = Integer.parseInt(request.getParameter("mPrice"));
+				String mPrice = request.getParameter("mPrice");
 				String mCnt  = request.getParameter("mCnt");
 				String mDesc = request.getParameter("mDesc");
-				int mNum  = Integer.parseInt(request.getParameter("mNum"));
-				request.setAttribute("cnt", ms.insertMaker(mName, mPrice,mCnt,mDesc));
+				Maker mk = new Maker(0,mName,Integer.parseInt(mPrice),Integer.parseInt(mCnt),0,mDesc);
+				request.setAttribute("rMap", ms.insertMaker(mk));
 			}else if(cmd.equals("updateMaker")) {
 				
 			}else if(cmd.equals("deleteMaker")) {

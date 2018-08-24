@@ -10,5 +10,4 @@ public interface MakerService {
 	public Map<String, Object> insertMaker(Maker mk);
 	public Map<String, Object> updateMaker(Maker mk);
 	public Map<String, Object> deleteMaker(Maker mk);
-	public int insertMaker(String mName, int mPrice, String mCnt, String mDesc);
 }

@@ -80,6 +80,7 @@ public class MakerDAOImpl implements MakerDAO {
 					rs.close();
 				}
 				if(ps!=null) {
+					
 					ps.close();
 				}
 			} catch(SQLException e) {
@@ -91,8 +92,35 @@ public class MakerDAOImpl implements MakerDAO {
 	}
 
 	@Override
-	public Map<String, Object> insertMaker(Maker mk) {
-		
+	public int insertMaker(Maker mk) {
+		Connection con = DBCon.getCon();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "insert into maker(mName, mPrice, mCnt, mTotal, mDesc) values(?,?,?,?,?)";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, mk.getMname());
+			ps.setInt(2, mk.getMprice());
+			ps.setInt(3, mk.getMcnt());
+			ps.setInt(4, mk.getMtotal());
+			ps.setString(5, mk.getMdesc());
+			return ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) {
+					rs.close();
+				}
+				if(ps!=null) {
+					ps.close();
+				}
+			} catch(SQLException e) {
+				
+			}
+			DBCon.close();
+		}
+		return 0;
 	}
 
 	@Override
@@ -105,6 +133,21 @@ public class MakerDAOImpl implements MakerDAO {
 	public Map<String, Object> deleteMaker(Maker mk) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int updateMakerTotal(int mNum) {
+		Connection con = DBCon.getCon();
+		String sql = "update maker set mTotal=mCnt * mPrice where mNum=(select max(mNum) from maker)";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			return ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBCon.close();
+		}
+		return 0;
 	}
 
 }
