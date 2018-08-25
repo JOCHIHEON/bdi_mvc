@@ -1,42 +1,52 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/common.jsp"%>
-<body>
-<div class="container">
-<table class="table table-bordered">
-	<tr>
-		<th>번호</th>
-		<td>${user.num}</td>
-	</tr>
-	<tr>
-		<th>이름</th>
-		<td><input type="text" id="name" value="${user.name}"></td>
-	</tr>
-	<tr>
-		<th>나이</th>
-		<td><input type="number" id="age" value="${user.age}"></td>
-	</tr>
-	<tr>
-		<td colspan="2"><button onclick="updateDel()">수정</button></td>
-	</tr>
-</table>
-</div>
-</body>
+<c:if test="${!empty rMap}">
 <script>
-	function updateDel(){
-		var name = document.querySelector("#name").value;
-		var age = document.querySelector("#age").value;
-		location.href='/user/userUpdate?num=${user.num}&name='+name+'&age='+age;
-	}
-	function goPage(){
+	alert('${rMap.msg}');
+	if('${rMap.success}'=='true'){
 		location.href='/user/userList';
 	}
-	var cnt = '${cnt}';
-	if(cnt==1){
-		alert('수정이 잘 되었습니다.');
-		goPage();
-	}else if(cnt===0){
-		alert('등록에 실패하였습니다.');
-	}
 </script>
+</c:if>
+<body>
+<div class="container">
+		<form action="/user/userUpdate" method="post">
+			<table class="table table-bordered">
+				<tr>	
+					<th>번호</th>
+					<td>${user.uino}</td>
+				</tr>
+				<tr>	
+					<th>이름</th>
+					<td><input type="text" name="uiName" value="${user.uiname}"></td>
+				</tr>
+				<tr>	
+					<th>아이디</th>
+					<td><input type="text" name="uiId" value="${user.uiid}"></td>
+				</tr>
+				<tr>	
+					<th>패스워드</th>
+					<td><input type="password" name="uiPwd" value="${user.uipwd}"></td>
+				</tr>
+				<tr>
+					<th>유저정보</th>
+					<td><input type="text" name="uiDesc" value="${user.uidesc}"></td>
+				</tr>
+				<tr>
+					<th>유저나이</th>
+					<td><input type="text" name="uiAge" value="${user.uiage}"></td>
+				</tr>
+				<tr>
+					<th>부서번호</th>
+					<td><input type="number" name="diNo" value="${user.dino}"></td>
+				</tr>
+				<tr>
+					<td colspan="2"><button>유저수정</button></td>
+				</tr>
+			</table>
+			<input type="hidden" type="number" name="uiNo" value="${user.uino}">
+		</form>
+	</div>
+</body>
 </html>

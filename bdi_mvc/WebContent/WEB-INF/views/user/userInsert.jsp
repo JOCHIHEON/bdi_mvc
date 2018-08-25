@@ -1,39 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/common.jsp"%>
-<body>
-<div class="container">
-<table class="table table-bordered">
-	<tr>
-		<th>이름</th>
-		<td><input type="text" id="name"></td>
-	</tr>
-	<tr>
-		<th>나이</th>
-		<td><input type="number" id="age"></td>
-	</tr>
-	<tr>
-		<td colspan="2"><button onclick="insertDel()">등록</button>
-		<button onclick="goPage()">취소</button></td>
-	</tr>
-</table>
-</div>
-</body>
+<c:if test="${!empty rMap}">
 <script>
-	function insertDel(){
-		var name = document.querySelector("#name").value;
-		var age = document.querySelector("#age").value;
-		location.href='/user/userInsert?name='+name+'&age='+age;
-	}
-	function goPage(){
-		location.href='/user/userList';
-	}
-	var cnt = '${cnt}';
-	if(cnt==1){
-		alert('등록이 잘 되었습니다.');
-		goPage();
-	}else if(cnt===0){
-		alert('등록에 실패하였습니다.');
+	alert('${rMap.msg}');
+	if('${rMap.success}'== "true"){
+		location.href="/user/userList";
 	}
 </script>
+</c:if>
+<body>
+	<div class="container">
+		<form action="/user/userInsert" method="post">
+			<table class="table table-bordered">
+				<tr>	
+					<th>이름</th>
+					<td><input type="text" name="uiName"></td>
+				</tr>
+				<tr>	
+					<th>아이디</th>
+					<td><input type="text" name="uiId"></td>
+				</tr>
+				<tr>	
+					<th>비멀번호</th>
+					<td><input type="password" name="uiPwd"></td>
+				</tr>
+				<tr>	
+					<th>유저정보</th>
+					<td><input type="text" name="uiDesc"></td>
+				</tr>
+				<tr>	
+					<th>나이</th>
+					<td><input type="number" name="uiAge"></td>
+				</tr>
+				<tr>	
+					<th>부서번호</th>
+					<td><input type="number" name="diNo"></td>
+				</tr>
+				<tr>
+					<td colspan="2"><button>유저등록</button></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
 </html>

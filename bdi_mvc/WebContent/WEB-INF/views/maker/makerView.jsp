@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/common.jsp"%>
+<c:if test="${!empty rMap}">
+<script>
+	alert('${rMap.msg}');
+	if('${rMap.success}'== "true"){
+		location.href="/maker/makerList";
+	}
+</script>
+</c:if>
 <body>
 <div class="container">
 		<table class="table table-bordered">
@@ -28,15 +36,17 @@
 				<th>상품설명</th>
 				<td>${maker.mdesc}</td>
 			</tr>
+			<tr>
+				<td colspan="2" style="text-align:center">
+				<form action = "/maker/makerDelete" method="post" style="">
+						<button type="button" data-page='/maker/makerUpdate?mNum=${maker.mnum}'>메이커수정</button>
+						<button>삭제</button>
+						<button type="button" data-page='/maker/makerList'>리스트가기</button>
+						<input type="hidden" name="mNum" value="${maker.mnum}">
+				</form>
+				</td>
+			</tr>
 		</table>
-		<div>
-			<button onclick="goPage()">리스트이동</button>
-		</div>
 	</div>
-<script>
-function goPage() {
-	location.href="/maker/makerList";
-}
-</script>
 </body>
 </html>
