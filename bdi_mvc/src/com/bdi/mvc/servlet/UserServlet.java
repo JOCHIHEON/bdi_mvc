@@ -58,7 +58,6 @@ public class UserServlet extends HttpServlet {
 				User ui = new User(Integer.parseInt(uiNo), uiName, uiId, uiPwd, uiDesc, Integer.parseInt(uiAge), Integer.parseInt(diNo));
 				request.setAttribute("rMap", us.updateUser(ui));
 			} else if(cmd.equals("userInsert")) {
-				String uiNo = request.getParameter("uiNo");
 				String uiName = request.getParameter("uiName");
 				String uiId = request.getParameter("uiId");
 				String uiPwd = request.getParameter("uiPwd");
