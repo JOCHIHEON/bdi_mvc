@@ -10,5 +10,5 @@ public interface UserService {
 	public User getUser(int uiNo);
 	public Map<String, Object> insertUser(User us);
 	public Map<String, Object> updateUser(User us);
-	public Map<String, Object> deleteUserO(User us);
+	public Map<String, Object> deleteUser(User us);
 }

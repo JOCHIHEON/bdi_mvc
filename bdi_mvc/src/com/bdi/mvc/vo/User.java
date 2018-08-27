@@ -65,4 +65,5 @@ public class User {
 		this.dino = dino;
 	}
 	private int dino;
+	public User() {};
 }

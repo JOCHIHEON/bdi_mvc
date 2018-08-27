@@ -48,8 +48,16 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Map<String, Object> deleteUserO(User us) {
-		return null;
+	public Map<String, Object> deleteUser(User us) {
+		Map<String, Object> rMap = new HashMap<String,Object>();
+		rMap.put("msg", "삭제 실패!");
+		rMap.put("success", "false");
+		int cnt = udao.deleteUser(us);
+		if(cnt==1) {
+			rMap.put("msg", "정상적으로 삭제 되었습니다.");
+			rMap.put("success", "true");
+		}
+		return rMap;
 	}
 
 }
