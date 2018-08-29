@@ -34,16 +34,6 @@ public class DepartDAOImpl implements DepartDAO {
 		}
 		return departList;
 	}
-	public static void main(String[] args) {
-		DepartDAO ddao = new DepartDAOImpl();
-		try {
-			System.out.println(ddao.selectDepartList(null));
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			DBCon.close();
-		}
-	}
 	@Override
 	public void setConnection(Connection con) {
 		this.con = con;
@@ -56,6 +46,48 @@ public class DepartDAOImpl implements DepartDAO {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, depart.getDiName());
 			ps.setString(2, depart.getDiDesc());
+			return ps.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	@Override
+	public Depart selectDepart(Depart depart) throws SQLException {
+		String sql = "select * from depart_info where diNo=?";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, depart.getDiNo());
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				return new Depart(rs.getInt("diNo"), 
+						rs.getString("diName"),
+						rs.getString("diDesc"),
+						rs.getInt("diCnt"));
+			}
+		}catch(SQLException e) {
+			throw e;
+		}
+		return null;
+	}
+	@Override
+	public int deleteDepart(Depart depart) throws SQLException {
+		String sql = "delete from depart_info where diNo=?";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, depart.getDiNo());
+			return ps.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	@Override
+	public int updateDepart(Depart depart) throws SQLException {
+		String sql = "update depart_info set diName=?, diDesc=? where diNo=?";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, depart.getDiName());
+			ps.setString(2, depart.getDiDesc());
+			ps.setInt(3, depart.getDiNo());
 			return ps.executeUpdate();
 		} catch (Exception e) {
 			throw e;

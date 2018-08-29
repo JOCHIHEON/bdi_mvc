@@ -9,4 +9,7 @@ import com.bdi.mvc.vo.Depart;
 public interface DepartService {
 	public List<Depart> getDepartList(Depart depart)throws SQLException;
 	public Map<String,Object> insertDepart(Depart depart)throws SQLException;
+	public Depart getDepart(Depart depart)throws SQLException;
+	public Map<String,Object> updateDepart(Depart depart)throws SQLException;
+	public Map<String,Object> deleteDepart(Depart depart)throws SQLException;
 }
