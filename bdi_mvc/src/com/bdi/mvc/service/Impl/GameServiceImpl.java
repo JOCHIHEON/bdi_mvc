@@ -39,6 +39,7 @@ public class GameServiceImpl implements GameService {
 
 	@Override
 	public Map<String, Object> insertGame(Game game) throws SQLException {
+		gdao.setConnection(DBCon.getCon());
 		try {
 			int cnt = gdao.insertGame(game);
 			Map<String,Object> rMap = new HashMap<String,Object>();
@@ -56,6 +57,7 @@ public class GameServiceImpl implements GameService {
 
 	@Override
 	public Map<String, Object> updateGame(Game game) throws SQLException {
+		gdao.setConnection(DBCon.getCon());
 		try {
 			int cnt = gdao.updateGame(game);
 			Map<String,Object> rMap = new HashMap<String,Object>();
@@ -73,6 +75,7 @@ public class GameServiceImpl implements GameService {
 
 	@Override
 	public Map<String, Object> deleteGame(Game game) throws SQLException {
+		gdao.setConnection(DBCon.getCon());
 		try {
 			int cnt = gdao.deleteGame(game);
 			Map<String,Object> rMap = new HashMap<String,Object>();

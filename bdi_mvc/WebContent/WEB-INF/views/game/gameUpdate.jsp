@@ -5,13 +5,13 @@
 <script>
 	alert('${rMap.msg}');
 	if('${rMap.cnt}'== 1){
-		location.href="/gmae/gameList";
+		location.href="/game/gameList";
 	}
 </script>
 </c:if>
 <body>
 <div class="container">
-<form action="/game/gameUpdate" method="post">
+<form action="/game/gameUpdate" method="post" enctype="multipart/form-data">
 	<table class="table table-bordered">
 		<tr>
 			<th>게임번호</th>
@@ -39,7 +39,7 @@
 		</tr>
 		<tr>
 			<th>게임이미지</th>
-			<td><input type="text" name="gcImg" value="${game.gcImg}"></td>
+			<td><input type="file" name="gcImg" value="${game.gcImg}"></td>
 		</tr>
 		<tr>
 			<td colspan="2"><button>게임수정</button></td>

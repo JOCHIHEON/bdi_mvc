@@ -11,7 +11,7 @@
 </c:if>
 <body>
 <div class="container">
-<form action="/game/gameInsert" method="post">
+<form action="/game/gameInsert" method="post" enctype="multipart/form-data">
 	<table class="table table-bordered">
 		<tr>
 			<th>게임이름</th>
@@ -35,7 +35,7 @@
 		</tr>
 		<tr>
 			<th>게임이미지</th>
-			<td><input type="text" name="gcImg"></td>
+			<td><input type="file" name="gcImg"></td>
 		</tr>
 		<tr>
 			<td colspan="2"><button>게임등록</button></td>

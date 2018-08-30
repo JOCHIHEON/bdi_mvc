@@ -1,6 +1,7 @@
 package com.bdi.mvc.servlet;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.bdi.mvc.common.UploadFiles;
 import com.bdi.mvc.service.GameService;
 import com.bdi.mvc.service.Impl.GameServiceImpl;
 import com.bdi.mvc.vo.Game;
@@ -42,15 +44,23 @@ public class GameServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		try {
 			if(cmd.equals("gameInsert")) {
-				String gcName = request.getParameter("gcName");
-				String gcVendor = request.getParameter("gcVendor");
-				String gcDesc = request.getParameter("gcDesc");
-				String gcImg = request.getParameter("gcImg");
-				int gcPrice = Integer.parseInt(request.getParameter("gcPrice"));
-				int gcOrder = Integer.parseInt(request.getParameter("gcOrder"));
+				Map<String,String> param = UploadFiles.saveFileList(request);
+				if(param.isEmpty()) {
+					new ServletException("파일 저장이 실패하였습니다.");
+				}
+				String gcName = param.get("gcName");
+				String gcVendor = param.get("gcVendor");
+				String gcDesc = param.get("gcDesc");
+				String gcImg = param.get("gcImg");
+				int gcPrice = Integer.parseInt(param.get("gcPrice"));
+				int gcOrder = Integer.parseInt(param.get("gcOrder"));
 				Game game = new Game(null,gcName,gcPrice,gcVendor,gcOrder, gcDesc, gcImg);
 				request.setAttribute("rMap", gs.insertGame(game));
-			}else if(cmd.equals("gameUpdate")){				
+			}else if(cmd.equals("gameUpdate")){		
+				Map<String,String> param = UploadFiles.saveFileList(request);
+				if(param.isEmpty()) {
+					new ServletException("파일 저장이 실패하였습니다.");
+				}
 				String gcName = request.getParameter("gcName");				
 				String gcVendor = request.getParameter("gcVendor");				
 				String gcDesc = request.getParameter("gcDesc");
