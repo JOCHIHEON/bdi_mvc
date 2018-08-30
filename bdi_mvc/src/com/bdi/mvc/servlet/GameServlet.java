@@ -25,6 +25,7 @@ public class GameServlet extends HttpServlet {
 				String GcNumStr = request.getParameter("gcNum");
 				Game game = new Game();
 				game.setGcNum(Integer.parseInt(GcNumStr));
+//				game.setGcNum(Integer.parseInt(request.getParameter("gcNum")));
 				request.setAttribute("game", gs.getGame(game));
 			}
 		} catch (Exception e) {
@@ -45,21 +46,22 @@ public class GameServlet extends HttpServlet {
 				String gcVendor = request.getParameter("gcVendor");
 				String gcDesc = request.getParameter("gcDesc");
 				String gcImg = request.getParameter("gcImg");
-				Game game = new Game(null,gcName,Integer.parseInt(request.getParameter("gcPrice")),gcVendor,
-						Integer.parseInt(request.getParameter("gcOrder")), gcDesc, gcImg);
+				int gcPrice = Integer.parseInt(request.getParameter("gcPrice"));
+				int gcOrder = Integer.parseInt(request.getParameter("gcOrder"));
+				Game game = new Game(null,gcName,gcPrice,gcVendor,gcOrder, gcDesc, gcImg);
 				request.setAttribute("rMap", gs.insertGame(game));
-			}else if(cmd.equals("gameUpdate")){
-				String gcName = request.getParameter("gcName");
-				String gcPrice = request.getParameter("gcPrice");
-				String gcVendor = request.getParameter("gcVendor");
-				String gcOrder = request.getParameter("gcOrder");
+			}else if(cmd.equals("gameUpdate")){				
+				String gcName = request.getParameter("gcName");				
+				String gcVendor = request.getParameter("gcVendor");				
 				String gcDesc = request.getParameter("gcDesc");
 				String gcImg = request.getParameter("gcImg");
-				Game game = new Game(Integer.parseInt("gcNum"),gcName,Integer.parseInt(request.getParameter(gcPrice)),gcVendor,
-						Integer.parseInt(request.getParameter(gcOrder)), gcDesc, gcImg);
+				int gcNum = Integer.parseInt(request.getParameter("gcNum"));
+				int gcPrice = Integer.parseInt(request.getParameter("gcPrice"));
+				int gcOrder = Integer.parseInt(request.getParameter("gcOrder"));
+				Game game = new Game(gcNum,gcName,gcPrice,gcVendor,gcOrder, gcDesc, gcImg);
 				request.setAttribute("rMap", gs.updateGame(game));
 			}else if(cmd.equals("gameDelete")){
-				Game game = new Game(Integer.parseInt("gcNum"),null,0,null,0, null, null);
+				Game game = new Game(Integer.parseInt(request.getParameter("gcNum")),null,0,null,0, null, null);
 				request.setAttribute("rMap", gs.deleteGame(game));
 			}
 		} catch (Exception e) {
