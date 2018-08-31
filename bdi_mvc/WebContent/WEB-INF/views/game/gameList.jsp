@@ -24,7 +24,7 @@
 				<td>${game.gcVendor}</td>
 				<td>${game.gcOrder}</td>
 				<td>${game.gcDesc}</td>
-				<td>${game.gcImg}</td>
+				<td><img src="${game.gcImg}" width="50" height="50"></td>
 			</tr>
 		</c:forEach>
 		</tbody>

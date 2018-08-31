@@ -30,7 +30,7 @@
 		</tr>
 		<tr>
 			<th>게임이미지</th>
-			<td>${game.gcImg}</td>			
+			<td><img src="${game.gcImg}" width="100" height="100"></td>			
 		</tr>
 		<tr>
 			<td colspan="2" style="text-align:center">

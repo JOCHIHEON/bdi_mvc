@@ -44,6 +44,14 @@
     <servlet-name>GameServlet</servlet-name>
     <url-pattern>/game/*</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>FileServlet</servlet-name>
+    <servlet-class>com.bdi.mvc.servlet.FileServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FileServlet</servlet-name>
+    <url-pattern>/file/*</url-pattern>
+  </servlet-mapping>
   <error-page>
     <error-code>404</error-code>
     <location>/WEB-INF/views/error/notFound.jsp</location>

@@ -61,13 +61,13 @@ public class GameServlet extends HttpServlet {
 				if(param.isEmpty()) {
 					new ServletException("파일 저장이 실패하였습니다.");
 				}
-				String gcName = request.getParameter("gcName");				
-				String gcVendor = request.getParameter("gcVendor");				
-				String gcDesc = request.getParameter("gcDesc");
-				String gcImg = request.getParameter("gcImg");
-				int gcNum = Integer.parseInt(request.getParameter("gcNum"));
-				int gcPrice = Integer.parseInt(request.getParameter("gcPrice"));
-				int gcOrder = Integer.parseInt(request.getParameter("gcOrder"));
+				String gcName = param.get("gcName");				
+				String gcVendor = param.get("gcVendor");				
+				String gcDesc = param.get("gcDesc");
+				String gcImg = param.get("gcImg");
+				int gcNum = Integer.parseInt(param.get("gcNum"));
+				int gcPrice = Integer.parseInt(param.get("gcPrice"));
+				int gcOrder = Integer.parseInt(param.get("gcOrder"));
 				Game game = new Game(gcNum,gcName,gcPrice,gcVendor,gcOrder, gcDesc, gcImg);
 				request.setAttribute("rMap", gs.updateGame(game));
 			}else if(cmd.equals("gameDelete")){
