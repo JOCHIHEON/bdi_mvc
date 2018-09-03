@@ -38,7 +38,7 @@ public class UploadFiles {
 				if(!fi.isFormField()) {
 					String fEndName = fi.getName().substring(fi.getName().lastIndexOf("."));
 					String fileName = File.separator + "files" + File.separator + System.currentTimeMillis() + fEndName;
-					String filePath = UPLOAD_PATH + File.separator + fileName;
+					String filePath = UPLOAD_PATH  + fileName;
 					File sFile = new File(filePath);
 					fi.write(sFile);
 					params.put(fi.getFieldName(), fileName);
