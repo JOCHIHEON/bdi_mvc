@@ -59,7 +59,7 @@ public class GameServlet extends HttpServlet {
 			}else if(cmd.equals("gameUpdate")){		
 				Map<String,String> param = UploadFiles.saveFileList(request);
 				if(param.isEmpty()) {
-					new ServletException("파일 저장이 실패하였습니다.");
+					new ServletException("파일 수정이 실패하였습니다.");
 				}
 				String gcName = param.get("gcName");				
 				String gcVendor = param.get("gcVendor");				
@@ -71,7 +71,11 @@ public class GameServlet extends HttpServlet {
 				Game game = new Game(gcNum,gcName,gcPrice,gcVendor,gcOrder, gcDesc, gcImg);
 				request.setAttribute("rMap", gs.updateGame(game));
 			}else if(cmd.equals("gameDelete")){
-				Game game = new Game(Integer.parseInt(request.getParameter("gcNum")),null,0,null,0, null, null);
+				Map<String,String> param = UploadFiles.saveFileList(request);
+				if(param.isEmpty()) {
+					new ServletException("파일 삭제가 실패하였습니다.");
+				}
+				Game game = new Game(Integer.parseInt(param.get("gcNum")),null,0,null,0, null, null);
 				request.setAttribute("rMap", gs.deleteGame(game));
 			}
 		} catch (Exception e) {
