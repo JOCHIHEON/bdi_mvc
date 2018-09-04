@@ -17,8 +17,9 @@ import com.bdi.mvc.vo.Game;
 public class GameServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private GameService gs = new GameServiceImpl();
+	private String uri;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String uri = "/views" +request.getRequestURI();
+		uri = request.getRequestURI();
 		String cmd = uri.substring(uri.lastIndexOf("/")+1);
 		try {
 			if(cmd.equals("gameList")) {
@@ -33,13 +34,11 @@ public class GameServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		RequestDispatcher rd = request.getRequestDispatcher(uri);
-		rd.forward(request, response);
+		doService(request,response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String uri = "/views" + request.getRequestURI();
+		uri = request.getRequestURI();
 		String cmd = uri.substring(uri.lastIndexOf("/")+1);
 		request.setCharacterEncoding("utf-8");
 		try {
@@ -81,7 +80,13 @@ public class GameServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		RequestDispatcher rd = request.getRequestDispatcher(uri);
+
+		doService(request,response);
+	}
+	private void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//클라이언트에서 요청한 uri앞에 '/views'를 붙여서 포워딩해준다.
+		//'/views'를 붙이는 이유는 ViewServlet을 호출하기 위해서임.
+		RequestDispatcher rd = request.getRequestDispatcher("/views" + uri);
 		rd.forward(request, response);
 	}
 
